@@ -1,5 +1,7 @@
 import hashlib
 import os
+from datetime import datetime
+
 
 def calculate_hashes(file_path):
     hashes = {
@@ -16,30 +18,56 @@ def calculate_hashes(file_path):
     return {name: h.hexdigest() for name, h in hashes.items()}
 
 
+def get_metadata(file_path):
+    file_info = os.stat(file_path)
+
+    return {
+        "File Name": os.path.basename(file_path),
+        "File Size": f"{file_info.st_size} bytes",
+        "Created": datetime.fromtimestamp(
+            file_info.st_ctime
+        ).strftime("%Y-%m-%d %H:%M:%S"),
+        "Modified": datetime.fromtimestamp(
+            file_info.st_mtime
+        ).strftime("%Y-%m-%d %H:%M:%S"),
+        "Accessed": datetime.fromtimestamp(
+            file_info.st_atime
+        ).strftime("%Y-%m-%d %H:%M:%S")
+    }
+
+
 def main():
-    print("=" * 50)
-    print("       FORENSIC HASH ANALYZER")
-    print("=" * 50)
+    print("=" * 60)
+    print("             FORENSIC FILE ANALYZER")
+    print("=" * 60)
 
     file_path = input("Enter the path to the evidence file: ")
 
     if not os.path.isfile(file_path):
-        print("Error: File not found.")
+        print("\nError: File not found.")
         return
 
-    print("\nCalculating hashes...\n")
+    print("\nAnalyzing evidence...\n")
 
-    results = calculate_hashes(file_path)
+    metadata = get_metadata(file_path)
+    hashes = calculate_hashes(file_path)
 
-    print(f"File: {os.path.basename(file_path)}")
-    print("-" * 50)
+    print("FILE METADATA")
+    print("-" * 60)
 
-    for algorithm, value in results.items():
+    for name, value in metadata.items():
+        print(f"{name}: {value}")
+
+    print("\nCRYPTOGRAPHIC HASHES")
+    print("-" * 60)
+
+    for algorithm, value in hashes.items():
         print(f"{algorithm}: {value}")
 
-    print("-" * 50)
-    print("Hash calculation completed.")
+    print("\n" + "=" * 60)
+    print("Analysis completed successfully.")
+    print("=" * 60)
 
 
-if __name__ == "__main__":
+if name == "main":
     main()
