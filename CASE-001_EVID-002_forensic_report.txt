@@ -1,0 +1,29 @@
+
+============================================================
+                 FORENSIC ANALYSIS REPORT
+============================================================
+
+CASE INFORMATION
+------------------------------------------------------------
+Case ID: CASE-001
+Evidence ID: EVID-002
+Examiner: DET.HARUNA AHMAD U.
+Evidence Description: SUSPECTED SYSTEM RECOVERED FROM DAN BARE YAHOO BOYS.
+
+FILE INFORMATION
+------------------------------------------------------------
+File Name: evidence.txt
+File Size: 28 bytes
+Created: 2026-08-15 20:30:02.732931
+Modified: 2026-08-15 20:30:02.732931
+Analysis Time: 2026-08-16 19:08:26
+
+CRYPTOGRAPHIC HASHES
+------------------------------------------------------------
+MD5: e53751322d70e6e43a7ecfac3cb204bc
+SHA-1: de136432a8227d9664ba2e2482762c45815a4eb8
+SHA-256: 20f9bbefafca1835b6753a27e8aaba5f774f21a90eff927cfcb9f82ff41d6ca1
+
+============================================================
+                 END OF FORENSIC REPORT
+============================================================
