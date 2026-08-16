@@ -23,44 +23,58 @@ def calculate_hashes(file_path):
 
 
 def main():
-    print("=" * 50)
-    print("        FORENSIC FILE ANALYZER")
-    print("=" * 50)
+    print("=" * 60)
+    print("             FORENSIC FILE ANALYZER")
+    print("=" * 60)
 
-    file_path = input("Enter the path to the evidence file: ")
+    # Case information
+    case_id = input("Enter Case ID: ")
+    evidence_id = input("Enter Evidence ID: ")
+    examiner = input("Enter Examiner Name: ")
+    description = input("Enter Evidence Description: ")
+
+    # Evidence file
+    file_path = input("\nEnter the path to the evidence file: ")
 
     if not os.path.isfile(file_path):
-        print("Error: File not found.")
+        print("\nError: File not found.")
         return
 
     file_info = os.stat(file_path)
 
-    print("\nFILE INFORMATION")
-    print("-" * 50)
-
-    print("File name:", os.path.basename(file_path))
-    print("File size:", file_info.st_size, "bytes")
-
     created = datetime.fromtimestamp(file_info.st_ctime)
     modified = datetime.fromtimestamp(file_info.st_mtime)
 
+    md5, sha1, sha256 = calculate_hashes(file_path)
+
+    print("\n")
+    print("=" * 60)
+    print("              FORENSIC ANALYSIS REPORT")
+    print("=" * 60)
+
+    print("\nCASE INFORMATION")
+    print("-" * 60)
+    print("Case ID:", case_id)
+    print("Evidence ID:", evidence_id)
+    print("Examiner:", examiner)
+    print("Description:", description)
+
+    print("\nFILE INFORMATION")
+    print("-" * 60)
+    print("File Name:", os.path.basename(file_path))
+    print("File Size:", file_info.st_size, "bytes")
     print("Created:", created)
     print("Modified:", modified)
 
-    print("\nCALCULATING HASHES...")
-    
-    md5, sha1, sha256 = calculate_hashes(file_path)
-
     print("\nCRYPTOGRAPHIC HASHES")
-    print("-" * 50)
-
+    print("-" * 60)
     print("MD5:", md5)
     print("SHA-1:", sha1)
     print("SHA-256:", sha256)
 
-    print("\n" + "=" * 50)
+    print("\n" + "=" * 60)
     print("Analysis completed successfully.")
-    print("=" * 50)
+    print("=" * 60)
 
 
 if __name__ == "__main__":
